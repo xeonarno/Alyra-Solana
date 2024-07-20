@@ -94,3 +94,18 @@ Build the web app
 ```shell
 npm run build
 ```
+
+# Todo 
+- ~~git pour le monde~~
+- compilation simple (front et contrat)
+- On code le button qui récupère le wallet
+- On code le timer 
+- On code le button qui paie
+- on code le contrat en back
+- on enregistre le paiement
+- Update le timer
+- On déploie
+- On teste sur testNet/devnet
+- ~~Faucet pour tout le monde~~
+- se répartir les rôles
+- les slides 
