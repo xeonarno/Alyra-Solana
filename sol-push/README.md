@@ -135,7 +135,7 @@ Ce projet est dapp Solana qui permet de rassembler la communauté Sol autour d'u
   - Logique de redistribution des fonds
 
 ### Base de Données
-- **Optionnelle** : Pour le suivi des utilisateurs, des transactions, etc. (à définir selon les besoins)
+- **Optionnelle** : Pour le suivi des utilisateurs, des transactions, etc.s
 
 ## Actions à coder
 ### Frontend
