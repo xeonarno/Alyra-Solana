@@ -154,7 +154,7 @@ Ce projet est dapp Solana qui permet de rassembler la communauté Sol autour d'u
 
 ## Dépendances
 - **Frontend** :
-  - React.js
+  - Next.js
 - **Backend** :
   - Solana CLI
   - Anchor
