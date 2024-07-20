@@ -26,7 +26,7 @@ Ce projet est dapp Solana qui permet de rassembler la communauté Sol autour d'u
 ## Architecture Générale
 ### Frontend (Client Web)
 - **Technologies** : 
-- **Frameworks/Bibliothèques** : React.js 
+- **Frameworks/Bibliothèques** : Next.js 
 - **Fonctionnalités** :
   - Connexion au portefeuille Solana
   - Affichage de la balance utilisateur
