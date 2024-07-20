@@ -95,7 +95,8 @@ Build the web app
 npm run build
 ```
 
-
+## Objectif
+Ce projet est dapp Solana qui permet de rassembler la communauté Sol autour d'un jeu simple. Un bouton, un compte à rebours, le dernier à cliquer sur le bouton remporte la cagnotte. Afin de faire durer le jeu, le compte à rebours est remis à 0 à chaque clic sur le bouton.
 
 ## Fonctionnalités
 1. **Connexion Wallet**
