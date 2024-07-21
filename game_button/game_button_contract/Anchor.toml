@@ -5,7 +5,7 @@ resolution = true
 skip-lint = false
 
 [programs.localnet]
-game_button_contract = "2kXynWLtHHwyXVRUBLzqKjL4VhTq1LnGd5PiDanf3w7R"
+game_button_contract = "7hXjf2dgP6tHbdm658hdDaKUnrzoryrR3nVoBELDEiT6"
 
 [registry]
 url = "https://api.apr.dev"
