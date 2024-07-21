@@ -1,6 +1,11 @@
 'use client';
 
+import { PublicKey } from '@solana/web3.js';
+import { FireButton } from '../button/fire-button';
 import { AppHero } from '../ui/ui-layout';
+import { useParams } from 'next/navigation';
+import { useMemo } from 'react';
+import { useWallet } from '@solana/wallet-adapter-react';
 
 const links: { label: string; href: string }[] = [
     { label: 'Solana Docs', href: 'https://docs.solana.com/' },
@@ -17,9 +22,12 @@ const links: { label: string; href: string }[] = [
 ];
 
 export default function DashboardFeature() {
+    const params = useParams();
+    const { publicKey, connected } = useWallet();
+    
     return (
         <div>
-            
+            <FireButton address={publicKey!} />
         </div>
     );
 }
