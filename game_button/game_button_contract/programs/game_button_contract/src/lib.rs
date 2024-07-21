@@ -1,6 +1,6 @@
 use anchor_lang::prelude::*;
 
-declare_id!("2kXynWLtHHwyXVRUBLzqKjL4VhTq1LnGd5PiDanf3w7R"); // Remplacez par l'ID de votre programme
+declare_id!("2kXynWLtHHwyXVRUBLzqKjL4VhTq1LnGd5PiDanf3w7R"); 
 
 #[program]
 pub mod game_button_contract {
@@ -9,7 +9,7 @@ pub mod game_button_contract {
     pub fn initialize(ctx: Context<Initialize>, vault: Pubkey, countdown: i64) -> Result<()> {
         let state = &mut ctx.accounts.state;
         state.vault = vault;
-        state.last_clicker = Pubkey::default(); // Valeur par défaut
+        state.last_clicker = Pubkey::default(); 
         state.last_click_time = 0;
         state.reward_amount = 0;
         state.countdown = countdown;
@@ -22,7 +22,7 @@ pub mod game_button_contract {
         if current_time >= state.last_click_time + state.countdown {
             state.last_clicker = ctx.accounts.user.key();
             state.last_click_time = current_time;
-            state.reward_amount += 1; // Exemple de distribution de récompense
+            state.reward_amount += 1;
         } else {
             return Err(ErrorCode::CooldownNotExpired.into());
         }
@@ -36,7 +36,6 @@ pub mod game_button_contract {
             let reward_amount = state.reward_amount;
             state.reward_amount = 0;
 
-            // Transfert des récompenses
             **ctx.accounts.vault.to_account_info().try_borrow_mut_lamports()? -= reward_amount;
             **ctx.accounts.user.to_account_info().try_borrow_mut_lamports()? += reward_amount;
         } else {
@@ -48,7 +47,7 @@ pub mod game_button_contract {
 
 #[derive(Accounts)]
 pub struct Initialize<'info> {
-    #[account(init, payer = user, space = 8 + 32 + 32 + 8 + 8 + 8)] // Ajustez les tailles si nécessaire
+    #[account(init, payer = user, space = 8 + 32 + 32 + 8 + 8 + 8)] 
     pub state: Account<'info, GameState>,
     #[account(mut)]
     pub user: Signer<'info>,
@@ -61,7 +60,7 @@ pub struct ClickButton<'info> {
     pub state: Account<'info, GameState>,
     #[account(mut)]
     pub user: Signer<'info>,
-    pub vault: Account<'info, Vault>, // Assurez-vous que Vault est correctement défini
+    pub vault: Account<'info, Vault>, 
     pub system_program: Program<'info, System>,
 }
 
@@ -71,7 +70,7 @@ pub struct DistributeRewards<'info> {
     pub state: Account<'info, GameState>,
     #[account(mut)]
     pub user: Signer<'info>,
-    pub vault: Account<'info, Vault>, // Assurez-vous que Vault est correctement défini
+    pub vault: Account<'info, Vault>, 
     pub system_program: Program<'info, System>,
 }
 
@@ -86,7 +85,6 @@ pub struct GameState {
 
 #[account]
 pub struct Vault {
-    // Définissez les champs du Vault ici, si nécessaire
 }
 
 #[error_code]
