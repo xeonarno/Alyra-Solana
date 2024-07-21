@@ -1,33 +1,53 @@
-'use client';
+'use client'
+import React, { useState, useEffect, useRef } from 'react';
+import toast, { Toaster } from 'react-hot-toast';
+import FireButton from '../button/fire-button';
+import Countdown from '../countdown/counter';
 
-import { PublicKey } from '@solana/web3.js';
-import { FireButton } from '../button/fire-button';
-import { AppHero } from '../ui/ui-layout';
-import { useParams } from 'next/navigation';
-import { useMemo } from 'react';
-import { useWallet } from '@solana/wallet-adapter-react';
+const TimerPage: React.FC = () => {
+  const [time, setTime] = useState<number>(60000); // 60 seconds in milliseconds
+  const [running, setRunning] = useState<boolean>(true);
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
+  const [toastShown, setToastShown] = useState<boolean>(false);
 
-const links: { label: string; href: string }[] = [
-    { label: 'Solana Docs', href: 'https://docs.solana.com/' },
-    { label: 'Solana Faucet', href: 'https://faucet.solana.com/' },
-    { label: 'Solana Cookbook', href: 'https://solanacookbook.com/' },
-    {
-        label: 'Solana Stack Overflow',
-        href: 'https://solana.stackexchange.com/',
-    },
-    {
-        label: 'Solana Developers GitHub',
-        href: 'https://github.com/solana-developers/',
-    },
-];
+  const handleFire = () => {
+    setTime((prevTime) => {
+      const newTime = prevTime + 10000;
+      return newTime > 60000 ? 60000 : newTime;
+    }); // add 10 seconds, but cap at 60 seconds
+  };
 
-export default function DashboardFeature() {
-    const params = useParams();
-    const { publicKey, connected } = useWallet();
-    
-    return (
-        <div>
-            <FireButton address={publicKey!} />
-        </div>
-    );
-}
+  useEffect(() => {
+    if (running) {
+      intervalRef.current = setInterval(() => {
+        setTime((prevTime) => {
+          if (prevTime <= 10) {
+            if (intervalRef.current) clearInterval(intervalRef.current);
+            setRunning(false);
+            if (!toastShown) {
+                console.log("toastShown", toastShown)
+              toast.error('End of game', { style: { background: 'red', color: 'white' } });
+              setToastShown(true);
+            }
+            return 0;
+          }
+          return prevTime - 10;
+        });
+      }, 10); // update every 10ms for smooth milliseconds display
+    }
+
+    return () => {
+      if (intervalRef.current) clearInterval(intervalRef.current);
+    };
+  }, [running]);
+
+  return (
+    <div className="flex flex-col items-center justify-center min-h-screen">
+      <Toaster />
+      <Countdown time={time} />
+      <FireButton handleFire={handleFire} />
+    </div>
+  );
+};
+
+export default TimerPage;
