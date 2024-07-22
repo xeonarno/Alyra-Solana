@@ -1,0 +1,52 @@
+{
+<<<<<<< HEAD
+    "name": "SolPush #3",
+    "symbol": "SOLPUSH",
+    "description": "Button game on solana",
+    "image": "3.png",
+    "attributes": [
+        {
+            "trait_type": "Rarity",
+            "value": "Silver"
+        }
+    ],
+    "properties": {
+        "files": [
+            {
+                "uri": "3.png",
+                "type": "image/png"
+            }
+        ],
+        "category": "image"
+    }
+}
+=======
+  "name": "Nom de votre NFT #3",
+  "symbol": "TEST",
+  "description": "Description de votre NFT.",
+  "image": "3.png",
+  "attributes": [
+    {
+      "trait_type": "Fond",
+      "value": "Bleu"
+    },
+    {
+      "trait_type": "Personnage",
+      "value": "Alien"
+    },
+    {
+      "trait_type": "Accessoire",
+      "value": "Casquette"
+    }
+  ],
+  "properties": {
+    "files": [
+      {
+        "uri": "3.png",
+        "type": "image/png"
+      }
+    ],
+    "category": "image",
+  }
+}
+>>>>>>> origin/main
