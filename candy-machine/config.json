@@ -1,7 +1,7 @@
 {
   "tokenStandard": "pnft",
-  "number": 5,
-  "symbol": "TEST",
+  "number": 100,
+  "symbol": "SOLPUSH",
   "sellerFeeBasisPoints": 500,
   "isMutable": true,
   "isSequential": false,

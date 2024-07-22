@@ -1,29 +1,21 @@
 {
-  "name": "Nom de votre NFT #4",
-  "symbol": "TEST",
-  "description": "Description de votre NFT.",
-  "image": "4.png",
-  "attributes": [
-    {
-      "trait_type": "Fond",
-      "value": "Bleu"
-    },
-    {
-      "trait_type": "Personnage",
-      "value": "Alien"
-    },
-    {
-      "trait_type": "Accessoire",
-      "value": "Casquette"
-    }
-  ],
-  "properties": {
-    "files": [
-      {
-        "uri": "4.png",
-        "type": "image/png"
-      }
+    "name": "SolPush #4",
+    "symbol": "SOLPUSH",
+    "description": "Button game on solana",
+    "image": "4.png",
+    "attributes": [
+        {
+            "trait_type": "Rarity",
+            "value": "Gold"
+        }
     ],
-    "category": "image",
-  }
+    "properties": {
+        "files": [
+            {
+                "uri": "4.png",
+                "type": "image/png"
+            }
+        ],
+        "category": "image"
+    }
 }
