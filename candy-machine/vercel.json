@@ -1,0 +1,14 @@
+{
+  "builds": [
+    {
+      "src": "mint_ui/package.json",
+      "use": "@vercel/next"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "mint_ui/$1"
+    }
+  ]
+}
