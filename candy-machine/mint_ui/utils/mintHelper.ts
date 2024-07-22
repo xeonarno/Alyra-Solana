@@ -282,7 +282,7 @@ export const routeBuilder = async (
       merkleRoot: getMerkleRoot(allowlist),
       user: publicKey(umi.identity),
     });
-    console.log("allowListProof",allowListProof)
+    console.log("allowListProof", allowListProof)
     if (allowListProof === null) {
       console.log("null")
       tx2 = tx2.add(
@@ -340,9 +340,9 @@ export const buildTx = (
   guardToUse:
     | GuardGroup<DefaultGuardSet>
     | {
-        label: string;
-        guards: undefined;
-      },
+      label: string;
+      guards: undefined;
+    },
   mintArgs: Partial<DefaultGuardSetMintArgs> | undefined,
   luts: AddressLookupTableInput[],
   latestBlockhash: BlockhashWithExpiryBlockHeight,
