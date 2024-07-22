@@ -39,8 +39,13 @@ const TimerPage: React.FC = () => {
     return () => {
       if (intervalRef.current) clearInterval(intervalRef.current);
     };
-  }, [running]);
-
+  }, [running, toastShown]);
+  useEffect(() => {
+    const gradientAngle = 45 + ((60000 - time) / 1000) * 2; // Calculate the angle
+    document.body.style.background = `conic-gradient(from ${gradientAngle}deg, #13616e, #15321f) no-repeat`;
+    document.body.style.backgroundSize = 'cover';
+    document.body.style.transition = 'background 20s linear';
+  }, [time]);
   return (
     <div className="flex flex-col items-center justify-center min-h-screen">
       <Toaster />
