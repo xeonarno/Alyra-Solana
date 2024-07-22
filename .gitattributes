@@ -2,3 +2,5 @@ candy-machine/mint_ui/.next filter=lfs diff=lfs merge=lfs -text
 candy-machine/mint_ui/node_modules filter=lfs diff=lfs merge=lfs -text
 candy-machine/mint_ui/.next/cache/webpack/client-development/0.pack filter=lfs diff=lfs merge=lfs -text
 candy-machine/mint_ui/node_modules/.pnpm/@next+swc-linux-x64-musl@13.1.6/node_modules/@next/swc-linux-x64-musl/next-swc.linux-x64-musl.node filter=lfs diff=lfs merge=lfs -text
+candy-machine/mint_ui/.next/cache/webpack/client-development/* filter=lfs diff=lfs merge=lfs -text
+candy-machine/mint_ui/node_modules/.pnpm/* filter=lfs diff=lfs merge=lfs -text
