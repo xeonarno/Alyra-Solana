@@ -9,7 +9,6 @@ import { ExplorerLink } from '../cluster/cluster-ui';
 import { AppHero, ellipsify } from '../ui/ui-layout';
 import {
     AccountBalance,
-    AccountButtons,
     AccountTokens,
     AccountTransactions,
 } from './account-ui';
