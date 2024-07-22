@@ -2,10 +2,32 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: 'Digital-7';
+  src: url("../public/fonts/digital_7/digital-7.ttf");
+}
 body {
-    color: white;
-    background: conic-gradient(from 45deg, #0A3239, #A33C41);
-    background-image: conic-gradient(from 45deg, #00d2ff, #005792);
-    background: conic-gradient(from 45deg, #2CAEC4, #4F4EF0) no-repeat;
-    background-size: cover;
-  }
+  color: white;
+  background: conic-gradient(from 45deg, #0A3239, #A33C41);
+  background-image: conic-gradient(from 45deg, #00d2ff, #005792);
+  background: conic-gradient(from 45deg, #2CAEC4, #4F4EF0) no-repeat;
+  background: conic-gradient(from 165deg, #13616e, #15321f) 0% 0% / cover no-repeat;
+  background-size: cover;
+}
+
+.digital-clock {
+  font-family: 'Digital-7', monospace;
+  letter-spacing: 0.1em;
+  font-size: 4rem; /* Adjust size as needed */
+  display: grid;
+  grid-template-columns: repeat(5, auto); /* Fixed-width columns for consistency */
+  text-align: center;
+  justify-content: center;
+}
+
+.digital-clock > div {
+  min-width: 5ch; /* Adjust based on your font size and character count */
+  max-width: 5ch; /* Keep columns from growing too wide */
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
