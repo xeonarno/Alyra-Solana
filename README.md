@@ -6,6 +6,10 @@
 -
 -
 
+## Lien
+
+CandyMachine Explorer : [link](<https://www.solaneyes.com/address/FCwLouhfyuUJtheHSawaEyGzyG1w4ZWjxu8dTg9CJnNW>)
+Mint Page : [link](<https://sol-push-mint.vercel.app/>)
 
 ## Objectif
 Ce projet est dapp Solana qui permet de rassembler la communauté Sol autour d'un jeu simple. Un bouton, un compte à rebours, le dernier à cliquer sur le bouton remporte la cagnotte. Afin de faire durer le jeu, le compte à rebours est remis à 0 à chaque clic sur le bouton.
@@ -29,6 +33,7 @@ Ce projet est dapp Solana qui permet de rassembler la communauté Sol autour d'u
 5. **Intégration NFT**
    - Création et gestion d'une collection NFT sur Solana.
    - Redistribution automatique des fonds vers les détenteurs de cette collection lors des interactions avec le bouton.
+
 
 ## Architecture Générale
 ### Frontend (Client Web)
