@@ -11,10 +11,13 @@ const TimerPage: React.FC = () => {
   const [toastShown, setToastShown] = useState<boolean>(false);
 
   const handleFire = () => {
+    //TODO - appel contrat ici ! 
+    // add 10s to the timer
     setTime((prevTime) => {
       const newTime = prevTime + 10000;
       return newTime > 60000 ? 60000 : newTime;
-    }); // add 10 seconds, but cap at 60 seconds
+    });
+
   };
 
   useEffect(() => {
