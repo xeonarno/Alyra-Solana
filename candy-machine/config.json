@@ -1,7 +1,12 @@
 {
   "tokenStandard": "pnft",
+<<<<<<< HEAD
   "number": 100,
   "symbol": "SOLPUSH",
+=======
+  "number": 5,
+  "symbol": "TEST",
+>>>>>>> origin/main
   "sellerFeeBasisPoints": 500,
   "isMutable": true,
   "isSequential": false,
@@ -22,7 +27,11 @@
   "guards": {
     "default": {
       "solPayment": {
+<<<<<<< HEAD
         "value": 0.5,
+=======
+        "value": 0.002,
+>>>>>>> origin/main
         "destination": "6a5t5LPCx71va8nDhAJi7zZeqDaXzL1SbpX6bPEDVDtS"
       }
     }
