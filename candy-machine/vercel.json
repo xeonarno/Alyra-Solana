@@ -5,7 +5,7 @@
       "use": "@vercel/next",
       "config": {
         "installCommand": "pnpm install",
-        "buildCommand": "pnpm run build && pnpm run start"
+        "buildCommand": "pnpm run build"
       }
     }
   ],
