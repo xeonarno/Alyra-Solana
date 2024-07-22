@@ -1,0 +1,21 @@
+{
+    "name": "SolPush #53",
+    "symbol": "SOLPUSH",
+    "description": "Button game on solana",
+    "image": "53.png",
+    "attributes": [
+        {
+            "trait_type": "Rarity",
+            "value": "Bronze"
+        }
+    ],
+    "properties": {
+        "files": [
+            {
+                "uri": "53.png",
+                "type": "image/png"
+            }
+        ],
+        "category": "image"
+    }
+}

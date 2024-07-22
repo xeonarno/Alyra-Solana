@@ -1,0 +1,42 @@
+{
+<<<<<<< HEAD
+  "name": "SolPush",
+  "symbol": "SOLPUSH",
+  "description": "Sol Button on Solana",
+  "seller_fee_basis_points": 500,
+  "image": "collection.png",
+  "external_url": "https://sol-push.vercel.app/",
+=======
+  "name": "Nom de la Collection",
+  "symbol": "TEST",
+  "description": "Description de la collection NFT.",
+  "seller_fee_basis_points": 500,
+  "image": "collection.png",
+  "external_url": "https://votre-site-web.com",
+>>>>>>> origin/main
+  "attributes": [
+    {
+      "trait_type": "Type",
+      "value": "Collection"
+    }
+  ],
+  "properties": {
+    "files": [
+      {
+        "uri": "collection.png",
+        "type": "image/png"
+      }
+    ],
+<<<<<<< HEAD
+    "category": "image"
+=======
+    "category": "image",
+    "creators": [
+      {
+        "address": "Ask4tpFeuGLF63CMeUgEgJFAVzWbMhBbeXvbzjMdxxbp",
+        "share": 100
+      }
+    ]
+>>>>>>> origin/main
+  }
+}
