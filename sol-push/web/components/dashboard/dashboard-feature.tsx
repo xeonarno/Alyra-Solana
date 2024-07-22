@@ -1,42 +1,61 @@
-'use client';
+'use client'
+import React, { useState, useEffect, useRef } from 'react';
+import toast, { Toaster } from 'react-hot-toast';
+import FireButton from '../button/fire-button';
+import Countdown from '../countdown/counter';
 
-import { AppHero } from '../ui/ui-layout';
+const TimerPage: React.FC = () => {
+  const [time, setTime] = useState<number>(60000); // 60 seconds in milliseconds
+  const [running, setRunning] = useState<boolean>(true);
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
+  const [toastShown, setToastShown] = useState<boolean>(false);
 
-const links: { label: string; href: string }[] = [
-    { label: 'Solana Docs', href: 'https://docs.solana.com/' },
-    { label: 'Solana Faucet', href: 'https://faucet.solana.com/' },
-    { label: 'Solana Cookbook', href: 'https://solanacookbook.com/' },
-    {
-        label: 'Solana Stack Overflow',
-        href: 'https://solana.stackexchange.com/',
-    },
-    {
-        label: 'Solana Developers GitHub',
-        href: 'https://github.com/solana-developers/',
-    },
-];
+  const handleFire = () => {
+    //TODO - appel contrat ici ! 
+    // add 10s to the timer
+    setTime((prevTime) => {
+      const newTime = prevTime + 10000;
+      return newTime > 60000 ? 60000 : newTime;
+    });
 
-export default function DashboardFeature() {
-    return (
-        <div>
-            <AppHero title="gm" subtitle="Say hi to your new Solana dApp." />
-            <div className="max-w-xl mx-auto py-6 sm:px-6 lg:px-8 text-center">
-                <div className="space-y-2">
-                    <p>Here are some helpful links to get you started.</p>
-                    {links.map((link, index) => (
-                        <div key={index}>
-                            <a
-                                href={link.href}
-                                className="link"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                            >
-                                {link.label}
-                            </a>
-                        </div>
-                    ))}
-                </div>
-            </div>
-        </div>
-    );
-}
+  };
+
+  useEffect(() => {
+    if (running) {
+      intervalRef.current = setInterval(() => {
+        setTime((prevTime) => {
+          if (prevTime <= 10) {
+            if (intervalRef.current) clearInterval(intervalRef.current);
+            setRunning(false);
+            if (!toastShown) {
+                console.log("toastShown", toastShown)
+              toast.error('End of game', { style: { background: 'red', color: 'white' } });
+              setToastShown(true);
+            }
+            return 0;
+          }
+          return prevTime - 10;
+        });
+      }, 10); // update every 10ms for smooth milliseconds display
+    }
+
+    return () => {
+      if (intervalRef.current) clearInterval(intervalRef.current);
+    };
+  }, [running, toastShown]);
+  useEffect(() => {
+    const gradientAngle = 45 + ((60000 - time) / 1000) * 2; // Calculate the angle
+    document.body.style.background = `conic-gradient(from ${gradientAngle}deg, #13616e, #15321f) no-repeat`;
+    document.body.style.backgroundSize = 'cover';
+    document.body.style.transition = 'background 20s linear';
+  }, [time]);
+  return (
+    <div className="flex flex-col items-center justify-center min-h-screen">
+      <Toaster />
+      <Countdown time={time} />
+      <FireButton handleFire={handleFire} />
+    </div>
+  );
+};
+
+export default TimerPage;
