@@ -22,7 +22,7 @@
   "guards": {
     "default": {
       "solPayment": {
-        "value": 0.002,
+        "value": 0.5,
         "destination": "6a5t5LPCx71va8nDhAJi7zZeqDaXzL1SbpX6bPEDVDtS"
       }
     }

@@ -18,12 +18,6 @@
         "type": "image/png"
       }
     ],
-    "category": "image",
-    "creators": [
-      {
-        "address": "6a5t5LPCx71va8nDhAJi7zZeqDaXzL1SbpX6bPEDVDtS",
-        "share": 100
-      }
-    ]
+    "category": "image"
   }
 }
