@@ -2,7 +2,11 @@
   "builds": [
     {
       "src": "mint_ui/package.json",
-      "use": "@vercel/next"
+      "use": "@vercel/next",
+      "config": {
+        "installCommand": "pnpm install",
+        "buildCommand": "pnpm run build"
+      }
     }
   ],
   "routes": [
