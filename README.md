@@ -37,7 +37,25 @@ Ce projet est dapp Solana qui permet de rassembler la communauté Sol autour d'u
 
 ## Architecture Générale
 ### Frontend (Client Web)
-- **Technologies** : 
+#### Prerequisites
+
+-   Node v18.18.0 or higher
+-   Solana CLI 1.18.9 or higher
+#### Install Dependencies
+
+```shell
+npm install
+
+Start the web app
+
+```shell
+npm run dev
+
+ Build the web app
+
+```shell
+npm run build
+
 - **Frameworks/Bibliothèques** : Next.js 
 - **Fonctionnalités** :
   - Connexion au portefeuille Solana
