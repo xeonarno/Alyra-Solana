@@ -35,7 +35,7 @@ export default function App({ Component, pageProps }: AppProps) {
           property="og:description"
           content="Website is based on Mark Sackerbergs work"
         />
-        <meta name="description" content="Website is based on Mark Sackerbergs work" />
+        <meta name="description" content="SolPush Mint" />
 
         <meta
           property="og:image"
