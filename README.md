@@ -31,7 +31,8 @@ Ce projet est dapp Solana qui permet de rassembler la communauté Sol autour d'u
    - L'autre moitié est distribuée aux détenteurs d'une collection NFT que l'on va déployé.
 
 5. **Intégration NFT**
-   - Création et gestion d'une collection NFT sur Solana.
+   - Création et gestion d'une collection NFT sur Solana. 
+      - Utilisation des PNft afin d'obliger les royalties pour continuer le jeu.
    - Redistribution automatique des fonds vers les détenteurs de cette collection lors des interactions avec le bouton.
 
 
