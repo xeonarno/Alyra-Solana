@@ -49,17 +49,17 @@ Ce projet est dapp Solana qui permet de rassembler la communauté Sol autour d'u
 
 ```shell
 npm install
-
+```
 Start the web app
 
 ```shell
 npm run dev
-
+```
  Build the web app
 
 ```shell
 npm run build
-
+```
 - **Frameworks/Bibliothèques** : Next.js 
 - **Fonctionnalités** :
   - Connexion au portefeuille Solana
@@ -130,3 +130,4 @@ npm run build
 - Futur token pour jouer via le token au lieu du sol (airdrop pour les holders du nft ainsi que les grosses commu sol)
 - Plusieurs modes de jeu différent (timer moins long, temps random à chaque fois qu'on met des sol)
 
+### Source :
