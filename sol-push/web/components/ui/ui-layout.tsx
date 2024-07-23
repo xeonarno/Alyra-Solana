@@ -10,7 +10,6 @@ import { usePathname } from 'next/navigation';
 import { AccountChecker } from '../account/account-ui';
 import {
     ClusterChecker,
-    ClusterUiSelect,
     ExplorerLink,
 } from '../cluster/cluster-ui';
 import toast, { Toaster } from 'react-hot-toast';
@@ -56,6 +55,15 @@ export function UiLayout({
                     </ul>
                 </div>
                 <div className="flex-none space-x-2">
+                    <Link href="https://sol-push-mint.vercel.app/" passHref legacyBehavior>
+                        <a
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+                        >
+                            Mint
+                        </a>
+                    </Link>
                     <WalletButton />
                 </div>
             </div>

@@ -5,18 +5,24 @@ import FireButton from '../button/fire-button';
 import Countdown from '../countdown/counter';
 
 const TimerPage: React.FC = () => {
-  const [time, setTime] = useState<number>(60000); // 60 seconds in milliseconds
-  const [running, setRunning] = useState<boolean>(true);
+  const [time, setTime] = useState<number>(0); // default 0 TODO add the value returned from the contract
+  const [running, setRunning] = useState<boolean>(false);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
   const [toastShown, setToastShown] = useState<boolean>(false);
 
   const handleFire = () => {
     //TODO - appel contrat ici ! 
     // add 10s to the timer
-    setTime((prevTime) => {
-      const newTime = prevTime + 10000;
-      return newTime > 60000 ? 60000 : newTime;
-    });
+    if(time > 0) {
+      setTime((prevTime) => {
+        const newTime = prevTime + 10000;
+        return newTime > 60000 ? 60000 : newTime;
+      });
+    } else {
+      setRunning(true);
+      setTime(60000);
+    }
+    
 
   };
 
