@@ -130,4 +130,9 @@ npm run build
 - Futur token pour jouer via le token au lieu du sol (airdrop pour les holders du nft ainsi que les grosses commu sol)
 - Plusieurs modes de jeu différent (timer moins long, temps random à chaque fois qu'on met des sol)
 
-### Source :
+### Bibliographie :
+
+- https://github.com/MarkSackerberg/umi-cmv3-ui-inofficial
+- https://developers.metaplex.com/
+- 
+
