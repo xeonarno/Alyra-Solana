@@ -27,5 +27,4 @@ export default {
     moduleFileExtensions: ['ts', 'js', 'html'],
     testEnvironment: '',
     coverageDirectory: '../coverage/anchor',
-    testTimeout: 70000, // augmente le timeout global à 70 secondes
 };

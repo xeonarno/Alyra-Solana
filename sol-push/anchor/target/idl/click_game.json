@@ -8,62 +8,92 @@
   },
   "instructions": [
     {
-      "name": "check_winner",
+      "name": "close",
       "discriminator": [
-        246,
-        195,
-        208,
-        54,
-        162,
-        217,
-        84,
-        64
+        98,
+        165,
+        201,
+        177,
+        108,
+        65,
+        206,
+        96
       ],
       "accounts": [
         {
-          "name": "game",
-          "writable": true
+          "name": "payer",
+          "writable": true,
+          "signer": true
         },
         {
-          "name": "last_player",
+          "name": "counter",
           "writable": true
-        },
-        {
-          "name": "system_program",
-          "address": "11111111111111111111111111111111"
         }
       ],
       "args": []
     },
     {
-      "name": "click",
+      "name": "decrement",
+      "discriminator": [
+        106,
+        227,
+        168,
+        59,
+        248,
+        27,
+        150,
+        101
+      ],
+      "accounts": [
+        {
+          "name": "counter",
+          "writable": true
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "increment",
       "discriminator": [
         11,
-        147,
-        179,
-        178,
-        145,
-        118,
-        45,
-        186
+        18,
+        104,
+        9,
+        104,
+        174,
+        59,
+        33
       ],
       "accounts": [
         {
-          "name": "game",
+          "name": "counter",
           "writable": true
-        },
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "initialize",
+      "discriminator": [
+        175,
+        175,
+        109,
+        31,
+        13,
+        152,
+        155,
+        237
+      ],
+      "accounts": [
         {
-          "name": "player",
+          "name": "payer",
           "writable": true,
           "signer": true
         },
         {
-          "name": "last_player",
-          "writable": true
-        },
-        {
-          "name": "contract_wallet",
-          "writable": true
+          "name": "counter",
+          "writable": true,
+          "signer": true
         },
         {
           "name": "system_program",
@@ -73,170 +103,55 @@
       "args": []
     },
     {
-      "name": "get_game_info",
+      "name": "set",
       "discriminator": [
-        140,
-        141,
-        245,
-        71,
-        227,
-        131,
-        217,
-        93
-      ],
-      "accounts": [
-        {
-          "name": "game"
-        }
-      ],
-      "args": [],
-      "returns": {
-        "defined": {
-          "name": "GameInfo"
-        }
-      }
-    },
-    {
-      "name": "initialize_game",
-      "discriminator": [
-        44,
-        62,
-        102,
-        247,
+        198,
+        51,
+        53,
+        241,
+        116,
+        29,
         126,
-        208,
-        130,
-        215
+        194
       ],
       "accounts": [
         {
-          "name": "game",
-          "writable": true,
-          "signer": true
-        },
-        {
-          "name": "initializer",
-          "writable": true,
-          "signer": true
-        },
-        {
-          "name": "system_program",
-          "address": "11111111111111111111111111111111"
+          "name": "counter",
+          "writable": true
         }
       ],
       "args": [
         {
-          "name": "owner",
-          "type": "pubkey"
+          "name": "value",
+          "type": "u8"
         }
       ]
     }
   ],
   "accounts": [
     {
-      "name": "Game",
+      "name": "Counter",
       "discriminator": [
-        27,
-        90,
-        166,
-        125,
-        74,
-        100,
-        121,
-        18
+        255,
+        176,
+        4,
+        245,
+        188,
+        253,
+        124,
+        25
       ]
     }
   ],
   "types": [
     {
-      "name": "Game",
+      "name": "Counter",
       "type": {
         "kind": "struct",
         "fields": [
           {
-            "name": "total_lamports",
-            "type": "u64"
-          },
-          {
-            "name": "last_player",
-            "type": "pubkey"
-          },
-          {
-            "name": "last_click_timestamp",
-            "type": "i64"
-          },
-          {
-            "name": "owner",
-            "type": "pubkey"
-          },
-          {
-            "name": "winners",
-            "type": {
-              "array": [
-                {
-                  "option": {
-                    "defined": {
-                      "name": "Winner"
-                    }
-                  }
-                },
-                10
-              ]
-            }
-          },
-          {
-            "name": "winner_index",
+            "name": "count",
             "type": "u8"
-          },
-          {
-            "name": "winner_count",
-            "type": "u8"
-          }
-        ]
-      }
-    },
-    {
-      "name": "GameInfo",
-      "type": {
-        "kind": "struct",
-        "fields": [
-          {
-            "name": "total_lamports",
-            "type": "u64"
-          },
-          {
-            "name": "remaining_time",
-            "type": "i64"
-          },
-          {
-            "name": "winners",
-            "type": {
-              "vec": {
-                "defined": {
-                  "name": "Winner"
-                }
-              }
-            }
-          }
-        ]
-      }
-    },
-    {
-      "name": "Winner",
-      "type": {
-        "kind": "struct",
-        "fields": [
-          {
-            "name": "player",
-            "type": "pubkey"
-          },
-          {
-            "name": "timestamp",
-            "type": "i64"
-          },
-          {
-            "name": "amount",
-            "type": "u64"
           }
         ]
       }

@@ -14,62 +14,92 @@ export type ClickGame = {
   },
   "instructions": [
     {
-      "name": "checkWinner",
+      "name": "close",
       "discriminator": [
-        246,
-        195,
-        208,
-        54,
-        162,
-        217,
-        84,
-        64
+        98,
+        165,
+        201,
+        177,
+        108,
+        65,
+        206,
+        96
       ],
       "accounts": [
         {
-          "name": "game",
-          "writable": true
+          "name": "payer",
+          "writable": true,
+          "signer": true
         },
         {
-          "name": "lastPlayer",
+          "name": "counter",
           "writable": true
-        },
-        {
-          "name": "systemProgram",
-          "address": "11111111111111111111111111111111"
         }
       ],
       "args": []
     },
     {
-      "name": "click",
+      "name": "decrement",
+      "discriminator": [
+        106,
+        227,
+        168,
+        59,
+        248,
+        27,
+        150,
+        101
+      ],
+      "accounts": [
+        {
+          "name": "counter",
+          "writable": true
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "increment",
       "discriminator": [
         11,
-        147,
-        179,
-        178,
-        145,
-        118,
-        45,
-        186
+        18,
+        104,
+        9,
+        104,
+        174,
+        59,
+        33
       ],
       "accounts": [
         {
-          "name": "game",
+          "name": "counter",
           "writable": true
-        },
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "initialize",
+      "discriminator": [
+        175,
+        175,
+        109,
+        31,
+        13,
+        152,
+        155,
+        237
+      ],
+      "accounts": [
         {
-          "name": "player",
+          "name": "payer",
           "writable": true,
           "signer": true
         },
         {
-          "name": "lastPlayer",
-          "writable": true
-        },
-        {
-          "name": "contractWallet",
-          "writable": true
+          "name": "counter",
+          "writable": true,
+          "signer": true
         },
         {
           "name": "systemProgram",
@@ -79,170 +109,55 @@ export type ClickGame = {
       "args": []
     },
     {
-      "name": "getGameInfo",
+      "name": "set",
       "discriminator": [
-        140,
-        141,
-        245,
-        71,
-        227,
-        131,
-        217,
-        93
-      ],
-      "accounts": [
-        {
-          "name": "game"
-        }
-      ],
-      "args": [],
-      "returns": {
-        "defined": {
-          "name": "gameInfo"
-        }
-      }
-    },
-    {
-      "name": "initializeGame",
-      "discriminator": [
-        44,
-        62,
-        102,
-        247,
+        198,
+        51,
+        53,
+        241,
+        116,
+        29,
         126,
-        208,
-        130,
-        215
+        194
       ],
       "accounts": [
         {
-          "name": "game",
-          "writable": true,
-          "signer": true
-        },
-        {
-          "name": "initializer",
-          "writable": true,
-          "signer": true
-        },
-        {
-          "name": "systemProgram",
-          "address": "11111111111111111111111111111111"
+          "name": "counter",
+          "writable": true
         }
       ],
       "args": [
         {
-          "name": "owner",
-          "type": "pubkey"
+          "name": "value",
+          "type": "u8"
         }
       ]
     }
   ],
   "accounts": [
     {
-      "name": "game",
+      "name": "counter",
       "discriminator": [
-        27,
-        90,
-        166,
-        125,
-        74,
-        100,
-        121,
-        18
+        255,
+        176,
+        4,
+        245,
+        188,
+        253,
+        124,
+        25
       ]
     }
   ],
   "types": [
     {
-      "name": "game",
+      "name": "counter",
       "type": {
         "kind": "struct",
         "fields": [
           {
-            "name": "totalLamports",
-            "type": "u64"
-          },
-          {
-            "name": "lastPlayer",
-            "type": "pubkey"
-          },
-          {
-            "name": "lastClickTimestamp",
-            "type": "i64"
-          },
-          {
-            "name": "owner",
-            "type": "pubkey"
-          },
-          {
-            "name": "winners",
-            "type": {
-              "array": [
-                {
-                  "option": {
-                    "defined": {
-                      "name": "winner"
-                    }
-                  }
-                },
-                10
-              ]
-            }
-          },
-          {
-            "name": "winnerIndex",
+            "name": "count",
             "type": "u8"
-          },
-          {
-            "name": "winnerCount",
-            "type": "u8"
-          }
-        ]
-      }
-    },
-    {
-      "name": "gameInfo",
-      "type": {
-        "kind": "struct",
-        "fields": [
-          {
-            "name": "totalLamports",
-            "type": "u64"
-          },
-          {
-            "name": "remainingTime",
-            "type": "i64"
-          },
-          {
-            "name": "winners",
-            "type": {
-              "vec": {
-                "defined": {
-                  "name": "winner"
-                }
-              }
-            }
-          }
-        ]
-      }
-    },
-    {
-      "name": "winner",
-      "type": {
-        "kind": "struct",
-        "fields": [
-          {
-            "name": "player",
-            "type": "pubkey"
-          },
-          {
-            "name": "timestamp",
-            "type": "i64"
-          },
-          {
-            "name": "amount",
-            "type": "u64"
           }
         ]
       }
