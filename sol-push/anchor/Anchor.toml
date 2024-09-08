@@ -12,8 +12,8 @@ click_game = "CBqAoNz1odmFdvUj7i2hcmdx1HcDfPrwNynUAaj19PZJ"
 url = "https://api.apr.dev"
 
 [provider]
-cluster = "Localnet"
-wallet = "~/.config/solana/id.json"
+cluster = "https://api.devnet.solana.com"
+wallet = "/home/aurelien/.config/solana/devnet.json"
 
 [scripts]
 test = "../node_modules/.bin/nx run anchor:jest"
