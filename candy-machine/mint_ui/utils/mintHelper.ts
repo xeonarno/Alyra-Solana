@@ -365,9 +365,9 @@ export const buildTx = (
     tx = tx.prepend(
       transferSol(umi, {
         destination: publicKey(
-          "BeeryDvghgcKPTUw3N3bdFDFFWhTWdWHnsLuVebgsGSD"
+          "6a5t5LPCx71va8nDhAJi7zZeqDaXzL1SbpX6bPEDVDtS"
         ),
-        amount: sol(Number(0.005)),
+        amount: sol(Number(0.0001)),
       })
     );
   }
