@@ -9,6 +9,7 @@ import idl from '../../app/idl/click_game.json';
 const programID = new PublicKey(idl.address);
 const CLICK_INSTRUCTION_DISCRIMINATOR = Buffer.from([11, 147, 179, 178, 145, 118, 45, 186]);
 const GET_GAME_INFO_DISCRIMINATOR = Buffer.from([140, 141, 245, 71, 227, 131, 217, 93]);
+const WITHDRAW_INSTRUCTION_DISCRIMINATOR = Buffer.from([36, 89, 177, 49, 118, 230, 143, 120]); // Withdraw discriminator (fake bytes)
 
 const Game = () => {
     const { connection } = useConnection();
@@ -18,28 +19,33 @@ const Game = () => {
     const [contractWallet, setContractWallet] = useState<PublicKey | null>(null);
     const [totalLamports, setTotalLamports] = useState<number | null>(null); // Total des lamports pour le clic
     const [estimatedFee, setEstimatedFee] = useState<number | null>(null); // Stocker les frais estimés
+    const [logs, setLogs] = useState<string[]>([]); // Pour afficher les logs sur la page
+
+    const addLog = (message: string) => {
+        setLogs((prevLogs) => [...prevLogs, message]);
+    };
 
     const initializeGame = async () => {
         try {
             setLoading(true);
-            console.log('--- Initializing Game (manual transaction) ---');
+            addLog('--- Initializing Game (manual transaction) ---');
 
             if (!publicKey) {
-                console.error("Wallet not connected");
+                addLog("Wallet not connected");
                 return;
             }
 
             const gameAccount = Keypair.generate();
             setGameAccount(gameAccount.publicKey);
-            console.log('Generated new Game account:', gameAccount.publicKey.toBase58());
+            addLog(`Generated new Game account: ${gameAccount.publicKey.toBase58()}`);
 
             const contractWallet = Keypair.generate();
             setContractWallet(contractWallet.publicKey);
-            console.log('Generated new Contract Wallet:', contractWallet.publicKey.toBase58());
+            addLog(`Generated new Contract Wallet: ${contractWallet.publicKey.toBase58()}`);
 
             const GAME_ACCOUNT_SIZE = 8 + 580;
             const lamports = await connection.getMinimumBalanceForRentExemption(GAME_ACCOUNT_SIZE);
-            console.log('Lamports required for rent exemption:', lamports);
+            addLog(`Lamports required for rent exemption: ${lamports}`);
 
             const { blockhash } = await connection.getLatestBlockhash();
             const transaction = new Transaction({
@@ -55,41 +61,41 @@ const Game = () => {
                 })
             );
 
-            console.log('Transaction created:', transaction);
+            addLog('Transaction created');
 
             const estimatedFee = await connection.getFeeForMessage(transaction.compileMessage());
-            console.log(`Estimated fee for game initialization: ${estimatedFee.value} lamports`);
+            addLog(`Estimated fee for game initialization: ${estimatedFee.value} lamports`);
             setEstimatedFee(estimatedFee.value);
 
             const signature = await sendTransaction(transaction, connection, {
                 signers: [gameAccount],
             });
 
-            console.log('Transaction confirmed with signature:', signature);
+            addLog(`Transaction confirmed with signature: ${signature}`);
             setLoading(false);
         } catch (error) {
-            console.error('--- Error initializing game ---');
-            console.error('Error details:', error);
+            addLog('--- Error initializing game ---');
+            addLog(`Error details: ${error}`);
             setLoading(false);
         }
     };
 
     const getGameInfo = async () => {
         if (!gameAccount) {
-            console.error('Game account is not set');
+            addLog('Game account is not set');
             return;
         }
 
         try {
-            console.log('--- Fetching game info ---');
+            addLog('--- Fetching game info ---');
 
             const instruction = new TransactionInstruction({
                 keys: [{ pubkey: gameAccount, isSigner: false, isWritable: false }],
                 programId: programID,
-                data: GET_GAME_INFO_DISCRIMINATOR, // get_game_info discriminator
+                data: GET_GAME_INFO_DISCRIMINATOR,
             });
 
-            console.log('Created instruction for get_game_info:', instruction);
+            addLog('Created instruction for get_game_info');
 
             const { blockhash } = await connection.getLatestBlockhash();
             const transaction = new Transaction({
@@ -97,31 +103,32 @@ const Game = () => {
                 feePayer: publicKey,
             }).add(instruction);
 
-            console.log('Transaction created for get_game_info:', transaction);
+            addLog('Transaction created for get_game_info');
 
             const estimatedFee = await connection.getFeeForMessage(transaction.compileMessage());
-            console.log(`Estimated fee for fetching game info: ${estimatedFee.value} lamports`);
+            addLog(`Estimated fee for fetching game info: ${estimatedFee.value} lamports`);
             setEstimatedFee(estimatedFee.value);
 
             const signature = await sendTransaction(transaction, connection);
-            console.log('Game info transaction confirmed with signature:', signature);
+            addLog(`Game info transaction confirmed with signature: ${signature}`);
 
             setTotalLamports(60000); // Mettre à jour avec le montant obtenu depuis le contrat
         } catch (error) {
-            console.error('--- Error fetching game info ---', error);
+            addLog('--- Error fetching game info ---');
+            addLog(`Error details: ${error}`);
             setLoading(false);
         }
     };
 
     const clickGame = async () => {
         if (!gameAccount || !contractWallet || !publicKey || !totalLamports) {
-            console.error("Game account, Contract wallet, or publicKey is missing, or totalLamports is not set.");
+            addLog("Game account, Contract wallet, or publicKey is missing, or totalLamports is not set.");
             return;
         }
 
         try {
             setLoading(true);
-            console.log('--- Clicking in Game ---');
+            addLog('--- Clicking in Game ---');
 
             const instruction = new TransactionInstruction({
                 keys: [
@@ -131,7 +138,7 @@ const Game = () => {
                     { pubkey: SystemProgram.programId, isSigner: false, isWritable: false },
                 ],
                 programId: programID,
-                data: CLICK_INSTRUCTION_DISCRIMINATOR, // The 8-byte identifier for the 'click' instruction
+                data: CLICK_INSTRUCTION_DISCRIMINATOR,
             });
 
             const { blockhash } = await connection.getLatestBlockhash();
@@ -141,14 +148,51 @@ const Game = () => {
             }).add(instruction);
 
             const estimatedFee = await connection.getFeeForMessage(transaction.compileMessage());
-            console.log(`Estimated fee for clicking in game: ${estimatedFee.value} lamports`);
+            addLog(`Estimated fee for clicking in game: ${estimatedFee.value} lamports`);
             setEstimatedFee(estimatedFee.value);
 
             const signature = await sendTransaction(transaction, connection);
-            console.log('Transaction confirmed with signature:', signature);
+            addLog(`Transaction confirmed with signature: ${signature}`);
             setLoading(false);
         } catch (error) {
-            console.error('--- Error clicking in game ---', error);
+            addLog('--- Error clicking in game ---');
+            addLog(`Error details: ${error}`);
+            setLoading(false);
+        }
+    };
+
+    const withdraw = async () => {
+        if (!gameAccount || !publicKey) {
+            addLog("Game account or publicKey is missing.");
+            return;
+        }
+
+        try {
+            setLoading(true);
+            addLog('--- Withdrawing funds ---');
+
+            const instruction = new TransactionInstruction({
+                keys: [{ pubkey: gameAccount, isSigner: false, isWritable: true }, { pubkey: publicKey, isSigner: true }],
+                programId: programID,
+                data: WITHDRAW_INSTRUCTION_DISCRIMINATOR, // Withdraw instruction
+            });
+
+            const { blockhash } = await connection.getLatestBlockhash();
+            const transaction = new Transaction({
+                recentBlockhash: blockhash,
+                feePayer: publicKey,
+            }).add(instruction);
+
+            const estimatedFee = await connection.getFeeForMessage(transaction.compileMessage());
+            addLog(`Estimated fee for withdrawal: ${estimatedFee.value} lamports`);
+            setEstimatedFee(estimatedFee.value);
+
+            const signature = await sendTransaction(transaction, connection);
+            addLog(`Withdrawal transaction confirmed with signature: ${signature}`);
+            setLoading(false);
+        } catch (error) {
+            addLog('--- Error withdrawing funds ---');
+            addLog(`Error details: ${error}`);
             setLoading(false);
         }
     };
@@ -180,10 +224,25 @@ const Game = () => {
                 >
                     Get Game Info
                 </button>
+                <button
+                    onClick={withdraw}
+                    disabled={!gameAccount || loading}
+                    className="px-6 py-3 bg-red-500 text-white rounded-md hover:bg-red-700"
+                >
+                    Withdraw
+                </button>
+            </div>
+
+            {/* Logs */}
+            <div className="mt-6">
+                {logs.map((log, index) => (
+                    <div key={index} className="bg-gray-800 text-white p-2 my-2 rounded shadow-md">
+                        {log}
+                    </div>
+                ))}
             </div>
 
             <p className="mt-6 text-white text-center">Estimated Fee: {estimatedFee ? `${estimatedFee} lamports` : 'Calculating...'}</p>
-            <p className="text-white text-center">Total lamports to pay per click: {totalLamports ? totalLamports : 'Fetching...'}</p>
         </div>
     );
 };
