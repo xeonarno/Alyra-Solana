@@ -109,6 +109,15 @@ const Game = () => {
             addLog(`Estimated fee for fetching game info: ${estimatedFee.value} lamports`);
             setEstimatedFee(estimatedFee.value);
 
+            // Simulate transaction
+            const simulationResult = await connection.simulateTransaction(transaction);
+            if (simulationResult.value.err) {
+                addLog('Simulation error:');
+                addLog(JSON.stringify(simulationResult.value.err));
+            } else {
+                addLog('Simulation successful, no error');
+            }
+
             const signature = await sendTransaction(transaction, connection);
             addLog(`Game info transaction confirmed with signature: ${signature}`);
 
@@ -116,6 +125,10 @@ const Game = () => {
         } catch (error) {
             addLog('--- Error fetching game info ---');
             addLog(`Error details: ${error}`);
+            if (error.logs) {
+                addLog('Transaction logs:');
+                addLog(JSON.stringify(error.logs));
+            }
             setLoading(false);
         }
     };
@@ -199,7 +212,7 @@ const Game = () => {
 
     return (
         <div className="game-container p-8 bg-opacity-70 rounded-md shadow-lg bg-black max-w-2xl mx-auto">
-            <h2 className="text-3xl font-semibold text-center mb-6 text-white">Click Game</h2>
+            <h2 className="text-3xl font-semibold text-center mb-6 text-white">Sol Push</h2>
 
             {/* Boutons */}
             <div className="text-center space-x-4">
@@ -234,7 +247,7 @@ const Game = () => {
             </div>
 
             {/* Logs */}
-            <div className="mt-6">
+            <div className="mt-4">
                 {logs.map((log, index) => (
                     <div key={index} className="bg-gray-800 text-white p-2 my-2 rounded shadow-md">
                         {log}
@@ -243,6 +256,7 @@ const Game = () => {
             </div>
 
             <p className="mt-6 text-white text-center">Estimated Fee: {estimatedFee ? `${estimatedFee} lamports` : 'Calculating...'}</p>
+            <p className="text-white text-center">Total lamports to pay per click: {totalLamports ? totalLamports : 'Fetching...'}</p>
         </div>
     );
 };
