@@ -4,7 +4,7 @@
 
 - Aurélien Monteillet
 - Ahmed Bouchriha
--
+- Arnaud Palin Sainte Agathe
 
 ## Lien
 
